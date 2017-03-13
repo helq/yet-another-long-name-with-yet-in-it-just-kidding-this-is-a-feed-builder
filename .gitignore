@@ -1,0 +1,5 @@
+cache.db
+ruby
+.bundle
+.directory
+Gemfile.lock
