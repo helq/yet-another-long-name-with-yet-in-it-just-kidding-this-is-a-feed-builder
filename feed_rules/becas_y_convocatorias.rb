@@ -19,11 +19,11 @@ class << BecasYConvocatorias
       'title'    => page.css('head > title').inner_text,
       'id'       => url,
       'link'     => url,
-      'updated'  => Date.parse( page.css('.article-container > article > .article-date').first.inner_text.tr(',', '') ).iso8601,
+      'updated'  => parse_date( page.css('.article-container > article > .article-date').first.inner_text ).iso8601,
       'entries'  => articles.collect do |article|
         title         = article.css('.article-title > a').first.inner_text
         link          = article.css('.article-title > a').first.attributes['href'].value
-        articles_date = Date.parse( article.css('.article-date').inner_text.tr(',', '') ).iso8601
+        articles_date = parse_date( article.css('.article-date').inner_text ).iso8601
         content       = article.css('p').inner_html
 
         {
@@ -38,5 +38,19 @@ class << BecasYConvocatorias
     }
 
     create_xml_feed example_feed
+  end
+
+  def parse_date(str)
+    matchDate = /^(\w+) (\d+), (\d+)$/.match str
+    return Date.today unless matchDate
+
+    day = matchDate[2]
+    month = ['Enero', 'Febrero', 'Marzo', 'Abril',
+             'Mayo', 'Junio', 'Julio', 'Agosto',
+             'Septiembre', 'Octubre', 'Noviembre',
+             'Diciembre'].index matchDate[1]
+    year = matchDate[3]
+
+    Date.parse "#{year}-#{month+1}-#{day}"
   end
 end
