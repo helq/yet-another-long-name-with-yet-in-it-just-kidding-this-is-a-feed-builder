@@ -11,7 +11,7 @@ class << Yt
       'title'     => page.title,
       'id'        => page.css('feed > id').children.first.content,
       'link'      => page.css('feed > link').first.attributes['href'].value,
-      'published' => page.css('feed > published').children.first.content,
+      'updated'   => page.css('feed > entry > updated').children.first.content,
       'author'    => page.css('feed > author > name').children.first.content,
       'entries'   => page.css('feed > entry').collect do |entry|
         thumbnail   = entry.css('group > thumbnail').first.attributes
