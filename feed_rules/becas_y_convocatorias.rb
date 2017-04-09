@@ -29,7 +29,7 @@ class << BecasYConvocatorias
         {
           'title'     => title,
           'link'      => link,
-          'id'        => "#{title} - #{link}",
+          'id'        => title,
           'published' => articles_date,
           'updated'   => articles_date,
           'content'   => content
