@@ -19,7 +19,7 @@ class << Tvmaze
       id_match = path_requested.match( %r{^/tvmaze/([0-9]*)} )
       return unless id_match
 
-      tvmaze_id = id_match[0]
+      tvmaze_id = id_match[1]
 
       # defining location of cache file
       cache_file = File.join "cache", "tvmaze", "#{tvmaze_id}_tvmaze.json"

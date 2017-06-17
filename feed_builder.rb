@@ -29,6 +29,8 @@ module FeedBuilder
   end
 
   def download_file_with_cache(url, cache_lifetime: nil, compression_func: nil)
+    #puts url
+
     require 'lz4-ruby'
     cache_db = 'cache.db' unless cache_db
     cache_lifetime = Time.now - (60 * 60 * 24) unless cache_lifetime # 24 hours ago
