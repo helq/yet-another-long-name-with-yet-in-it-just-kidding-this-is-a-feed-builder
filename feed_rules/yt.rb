@@ -57,9 +57,15 @@ class << Yt
   end
 
   def get_feed(req)
-    match_yt_channel_id = req.path.match( %r{^/yt/U.([^/]*)} )
+    match_yt_channel_id = req.path.match( %r{^/yt/(U.|PL)([^/]*)} )
     return unless match_yt_channel_id
-    yt_channel_id = "UU#{match_yt_channel_id[1]}"
+    if match_yt_channel_id[1] == 'PL'
+        yt_channel_id = "PL#{match_yt_channel_id[2]}"
+    else
+        yt_channel_id = "UU#{match_yt_channel_id[2]}"
+    end
+
+    p yt_channel_id
 
     require 'open-uri'
     yt_channel_rss = open( "https://www.youtube.com/feeds/videos.xml?playlist_id=#{yt_channel_id}" ).read

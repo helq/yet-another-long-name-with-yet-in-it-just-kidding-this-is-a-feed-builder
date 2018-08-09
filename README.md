@@ -18,7 +18,7 @@ ruby main.rb
 Or you could simply install `bundler` and run:
 
 ``` bash
-ruby install --path .
+bundler install --path .
 bundler exec ruby main.rb
 ```
 
