@@ -13,7 +13,6 @@ class << Tvmaze
       imdb_id = imdb_match[1]
 
       # defining location of cache file
-      cache_file = File.join "cache", "tvmaze", "#{imdb_id}.json"
       url_file   = "http://api.tvmaze.com/lookup/shows?imdb=#{imdb_id}"
     else
       id_match = path_requested.match( %r{^/tvmaze/([0-9]*)} )
@@ -22,7 +21,6 @@ class << Tvmaze
       tvmaze_id = id_match[1]
 
       # defining location of cache file
-      cache_file = File.join "cache", "tvmaze", "#{tvmaze_id}_tvmaze.json"
       url_file   = "http://api.tvmaze.com/shows/#{tvmaze_id}"
     end
 

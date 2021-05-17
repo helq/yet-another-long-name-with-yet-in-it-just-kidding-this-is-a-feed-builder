@@ -39,7 +39,8 @@ class << Yt
     download_only_once = Time.parse '1970-01-01T00:00:00+00:00' # alternativelly  Time.at(0)
 
     extract_video_length = Proc.new do |embeded_video_content|
-      length_seconds = embeded_video_content.match(/"length_seconds":([^,]*),/)[1].to_i
+      length_seconds = embeded_video_content.match(/"videoDurationSeconds\\":\\"([^\\]*)\\"/)[1].to_i
+      #puts length_seconds
       hours,   length_seconds = length_seconds.divmod 3600
       minutes, seconds        = length_seconds.divmod 60
 
@@ -65,10 +66,10 @@ class << Yt
         yt_channel_id = "UU#{match_yt_channel_id[2]}"
     end
 
-    p yt_channel_id
+    #p yt_channel_id
 
     require 'open-uri'
-    yt_channel_rss = open( "https://www.youtube.com/feeds/videos.xml?playlist_id=#{yt_channel_id}" ).read
+    yt_channel_rss = URI.open( "https://www.youtube.com/feeds/videos.xml?playlist_id=#{yt_channel_id}" ).read
 
     feed_content = rss_to_hash(yt_channel_rss)
 

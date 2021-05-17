@@ -18,7 +18,8 @@ ruby main.rb
 Or you could simply install `bundler` and run:
 
 ``` bash
-bundler install --path .
+bundle config set --local path '.'
+bundler install
 bundler exec ruby main.rb
 ```
 

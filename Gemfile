@@ -8,4 +8,5 @@ gem "rdoc"
 gem "nokogiri"
 gem 'sqlite3'
 gem 'lz4-ruby'
+gem 'webrick'
 # gem "rails"

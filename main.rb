@@ -23,6 +23,7 @@ app = lambda do |env|
   rule = Kernel.const_get feed_rule_name[1].split('_').collect(&:capitalize).join
 
   # creating feed with given info
+  #p rule
   feed = rule::get_feed request
   if feed
     [200, {'Content-Type' => 'application/xml'}, [feed]]

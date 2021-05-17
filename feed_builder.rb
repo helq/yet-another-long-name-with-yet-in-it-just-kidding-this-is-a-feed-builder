@@ -38,7 +38,7 @@ module FeedBuilder
     set_cache_database
 
     query_result = @db.execute 'select * from files where url = ?', url
-    if query_result.size > 0 
+    if query_result.size > 0
       cached_file = { url:         query_result[0][0],
                       mtime:       query_result[0][1],
                       last_access: query_result[0][2],
@@ -52,7 +52,7 @@ module FeedBuilder
       require 'open-uri'
 
       #p url
-      downloaded_file = open( url ).read
+      downloaded_file = URI.open( url ).read
       if not compression_func.nil?
         downloaded_file = compression_func.call downloaded_file
       end
@@ -113,7 +113,7 @@ module FeedBuilder
       xml.link       "href" => feed_content['link']
       xml.updated(   feed_content['updated'] ) if feed_content['updated']
       xml.author { xml.name feed_content['author'] }
-    
+
       feed_content['entries'].each do |entry|
         xml.entry do
           xml.title      entry['title']
